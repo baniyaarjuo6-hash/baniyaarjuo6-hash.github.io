@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arju Baniya | Business & Data Analytics</title>
+<meta name="description" content="Arju Baniya: business and data analytics portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+/* =====================================================================
+   ✏️  EDIT YOUR CONTENT HERE
+   ---------------------------------------------------------------------
+   Everything on the site comes from this section. To change something:
+     • Only edit the text inside the "quotation marks".
+     • Keep the commas at the end of lines.
+     • To add a project, copy a whole { ... }, block and change the text.
+     • To remove one, delete its whole { ... }, block.
+     • Put *stars* around words in the headline to make them gold italic.
+     • "link" fields: paste a URL (GitHub, Tableau, Power BI, Google Drive)
+       and a button appears. Leave it "" to hide the button.
+   ===================================================================== */
+
+const SITE = {
+  name: "Arju Baniya",
+  initials: "AB",
+  photo: "photo.jpg",          // upload your photo to GitHub with this exact name
+  tagline: "Business Analytics · Data Analytics · Reporting",
+  headline: "From raw data to *real decisions.*",
+  intro: "I'm a Toronto-based business and data analyst. I clean, structure, and analyze messy data, then turn it into recommendations people can act on. I've done this across compensation, operations, and hiring at organizations including MLSE and Air Liquide. My psychology training helps me read the human behaviour behind the numbers.",
+  email: "baniyaarjuo6@gmail.com",
+  linkedin: "https://linkedin.com/in/arju-baniya",
+  resume: "",                  // paste a link to your resume PDF to show a "Resume" button
+  location: "Toronto, Ontario",
+  contactLine: "Open to entry-level business analyst and data analyst roles in Toronto.",
+};
+
+const STATS = [
+  { num: "5",   text: "Analytics & operations roles across 5 organizations" },
+  { num: "4",   text: "Enterprise data environments, all in Workday" },
+  { num: "4",   text: "Professional certifications, incl. Wharton People Analytics" },
+  { num: "200", text: "Attendees at the largest program I've run" },
+];
+
+/* ---------- FEATURED CASE STUDIES (big cards, open in full) ---------- */
+const FEATURED = [
+  {
+    id: "data-quality",
+    org: "Air Liquide Healthcare Canada",
+    year: "2026",
+    type: "Data Analytics",
+    title: "Cleaning enterprise data so pay reporting can be trusted",
+    summary: "Turned a fragmented Workday compensation dataset into a reliable base for analysis, cutting a days-long manual task down to a simple query.",
+    tags: ["Excel", "Workday", "Data Cleaning", "Outlier Detection"],
+    context: "A national home healthcare company pulls a monthly compensation and headcount report from Workday. Leadership regularly asks pay questions about specific roles.",
+    problem: "Job titles had splintered into near-duplicates through casing, punctuation, and word-order variants. To answer one executive question, the team had to manually group several titles for the same role, which took days. Grade data also had inconsistencies nobody had mapped.",
+    approach: [
+      "Profiled the dataset and counted distinct values to measure how fragmented the key fields were",
+      "Standardized the job title field by collapsing variants into true, unique roles",
+      "Normalized salaries for different weekly hours before comparing pay",
+      "Built validation logic to flag grade outliers within same-role groups",
+      "Ran rule-based checks so each region was consistently on its correct grade structure",
+      "Scoped a range penetration analysis showing where employees sit within their salary bands",
+    ],
+    outcome: "My manager confirmed the findings were exactly what she needed. I also proposed a governance fix: restrict new requisitions to a validated title list, so dirty data stops entering the system at the source.",
+    note: "All employee data was confidential. No figures or records are shown here.",
+    link: "",
+    linkText: "",
+  },
+  {
+    id: "process-redesign",
+    org: "Air Liquide Healthcare Canada",
+    year: "2026",
+    type: "Business Analysis",
+    title: "Redesigning a recruiting workflow from audit to rollout",
+    summary: "Ran a current-state audit, mapped compliance requirements across provinces, and replaced an ad-hoc process with a standardized, repeatable workflow.",
+    tags: ["Process Improvement", "Requirements", "Compliance", "Gen AI"],
+    context: "Recruiters wrote job postings from scratch for every opening. Clinical roles also had separate, conflicting job descriptions in each province.",
+    problem: "There was no standard process, the output was inconsistent, and new pay-transparency and AI-disclosure rules varied by province with no single view of what applied where.",
+    approach: [
+      "Audited the current state and documented every finding in an evidence workbook tied to source links",
+      "Gathered requirements from my manager and the HR design team, including their mandatory structure",
+      "Built a province-by-province compliance matrix",
+      "Designed a hybrid model: ready-made templates for high-volume roles and one generic template for one-offs",
+      "Consolidated conflicting provincial documents into one baseline per role, with labelled swap-in blocks",
+      "Created a shared AI prompt so every recruiter produces consistent output",
+    ],
+    outcome: "Recruiters now have a documented, compliant, repeatable workflow. My manager singled out the sourced audit as a highlight of the project.",
+    note: "",
+    link: "",
+    linkText: "",
+  },
+  {
+    id: "master-data",
+    org: "Air Liquide Healthcare Canada",
+    year: "2026",
+    type: "Business Analysis",
+    title: "Consolidating competing files into one source of truth",
+    summary: "Led the master tracker for a cross-functional job title standardization project headed to executive approval.",
+    tags: ["Master Data", "Stakeholders", "Excel", "Workday"],
+    context: "A VP asked for a refined, professional set of job titles across the organization, and a four-person team was working on it in parallel.",
+    problem: "The team had several overlapping working sheets with different columns and logic, and no single version to bring to executives.",
+    approach: [
+      "Mapped the overlapping views and reconciled them into one master tracker",
+      "Defined the structure: department, proposed options, verification status, and a benchmarking column",
+      "Flagged regulatory constraints, such as protected clinical titles that legally can't change",
+      "Called out risks like title inflation before they reached review",
+      "Identified a gap in the competitor data and raised it early instead of filling it with guesses",
+    ],
+    outcome: "The team got one clean, decision-ready document, with risks and data gaps visible up front.",
+    note: "",
+    link: "",
+    linkText: "",
+  },
+  {
+    id: "interview-toolkit",
+    org: "Air Liquide Healthcare Canada",
+    year: "2026",
+    type: "Business Analysis",
+    title: "Designing a tool people actually adopt",
+    summary: "Started from why users ignored the old tool, then scoped and built a lighter structured interview toolkit.",
+    tags: ["User Requirements", "MVP Scoping", "Google Sheets"],
+    context: "Hiring managers had a master interview guide, but almost none of them used it.",
+    problem: "The guide was too heavy, so interviews weren't structured and candidates weren't compared on the same criteria.",
+    approach: [
+      "Identified the root cause: length and complexity, not a lack of content",
+      "Defined requirements for something simple, compact, and consistent for every candidate",
+      "Designed a question bank filterable by competency, department, and interview stage",
+      "Built a scoring rubric on the existing 0–5 scale and a minimal decision form",
+      "Shipped a phase-one draft first so stakeholders could iterate on it",
+    ],
+    outcome: "Managers get one standard, easy-to-use process, giving the business consistent, comparable hiring data.",
+    note: "",
+    link: "",
+    linkText: "",
+  },
+];
+
+/* ---------- DATA ANALYTICS PROJECTS (own section, near the top) ----------
+   status: "building" shows an "In development" badge. Change to "" when done.
+   Add your dashboard or GitHub link in "link" to show a "View project" button. */
+const ANALYTICS = [
+  {
+    id: "ecommerce",
+    label: "Data Analytics",
+    status: "building",
+    title: "E-Commerce Revenue & Profitability",
+    summary: "Where an online store makes and loses money, broken down by product, category, customer, and time.",
+    tags: ["SQL", "Power BI", "Excel"],
+    details: "Business question: which products, categories, and customers actually drive profit, not just revenue?\n\nApproach: prepare and clean the order data in Excel, write SQL queries for revenue, profit margin, average order value, and growth trends, then build an interactive Power BI dashboard with drill-downs by product, category, and region.\n\n✏️ Add your key findings and recommendations here once it's done.",
+    link: "",
+    linkText: "View dashboard",
+  },
+  {
+    id: "financial-dashboard",
+    label: "Financial Analytics",
+    status: "building",
+    title: "Financial Performance Dashboard",
+    summary: "A KPI dashboard tracking revenue, expenses, margins, and budget vs. actual for leadership.",
+    tags: ["Power BI", "Excel"],
+    details: "Business question: is the business on track, and where is it over or under budget?\n\nApproach: model income statement data, calculate core KPIs like gross margin, operating margin, and expense ratios, and compare actuals against budget over time in one executive-ready view.\n\n✏️ Add your key findings and recommendations here once it's done.",
+    link: "",
+    linkText: "View dashboard",
+  },
+  {
+    id: "product-analytics",
+    label: "Product Analytics",
+    status: "building",
+    title: "Product Analytics",
+    summary: "How users move through a product, where they drop off, and what keeps them engaged.",
+    tags: ["SQL", "Funnel Analysis", "Cohorts"],
+    details: "Business question: where are users dropping off, and which behaviours separate engaged users from the rest?\n\nApproach: build a conversion funnel, run cohort retention analysis, measure feature engagement, and recommend the product changes with the biggest expected impact.\n\n✏️ Add your key findings and recommendations here once it's done.",
+    link: "",
+    linkText: "View project",
+  },
+  {
+    id: "churn",
+    label: "Customer Analytics",
+    status: "building",
+    title: "Customer Churn Analysis",
+    summary: "Which customers leave, why they leave, and what the business can do to keep them.",
+    tags: ["SQL", "Python", "Segmentation"],
+    details: "Business question: what predicts churn, and which customers are most at risk?\n\nApproach: explore the customer data, segment customers, compare churned vs. retained groups to find the strongest drivers, and turn the results into specific retention actions.\n\n✏️ Add your key findings and recommendations here once it's done.",
+    link: "",
+    linkText: "View project",
+  },
+];
+
+/* ---------- MORE PROJECTS (smaller cards, also open in full) ---------- */
+const PROJECTS = [
+  {
+    id: "productivity-experiment",
+    label: "Academic · Python",
+    status: "",
+    title: "Behavioural Interventions & Productivity",
+    summary: "A controlled experiment on productivity interventions, analyzed in Python.",
+    tags: ["Python", "Pandas", "Experimental Design"],
+    details: "Designed a controlled experiment to test whether specific behavioural interventions improved productivity, then cleaned and analyzed the results in Python (Pandas), Excel, and Google Sheets.\n\n✏️ Add your key finding here.",
+    link: "",
+    linkText: "",
+  },
+  {
+    id: "hiring-fairness",
+    label: "Academic · Statistics",
+    status: "",
+    title: "Hiring Decision Fairness & Bias Analysis",
+    summary: "Statistical analysis of hiring decisions for bias and fairness gaps.",
+    tags: ["SPSS", "Statistics"],
+    details: "Analyzed hiring outcomes across candidate groups to test for bias and fairness gaps.\n\n✏️ Add your method and key finding here.",
+    link: "",
+    linkText: "",
+  },
+  {
+    id: "culture-gap",
+    label: "Academic · Research",
+    status: "",
+    title: "Organizational Culture Gap Analysis",
+    summary: "Comparing current vs. desired culture to find gaps and set priorities.",
+    tags: ["Survey Design", "Gap Analysis"],
+    details: "Measured the gap between an organization's current and desired culture, then turned the results into prioritized recommendations.\n\n✏️ Add your method and key finding here.",
+    link: "",
+    linkText: "",
+  },
+  {
+    id: "cnib",
+    label: "CNIB · 2026",
+    status: "",
+    title: "HR Analytics & Recruitment Research",
+    summary: "Accessible recruitment workbook, AI-in-hiring research, and daily HRIS data work.",
+    tags: ["ADP", "Greenhouse", "Research"],
+    details: "As an HR Analytics Intern, I managed daily HRIS data in ADP and ATS workflows in Greenhouse. I also built an accessible recruitment workbook and wrote a research report on how AI is changing recruitment.",
+    link: "",
+    linkText: "",
+  },
+  {
+    id: "partnerships",
+    label: "Canadian Lifecare Learning · 2026",
+    status: "",
+    title: "Partnership Reporting & CRM",
+    summary: "Managed CRM data for 50+ partner organizations and produced biweekly performance reports.",
+    tags: ["CRM", "Reporting"],
+    details: "As a Strategy & Analytics Intern, I maintained CRM records for 50+ organizational partnerships and produced biweekly performance reports for the team.",
+    link: "",
+    linkText: "",
+  },
+  {
+    id: "volunteer-alberta",
+    label: "Volunteer Alberta · 2025–26",
+    status: "",
+    title: "Program Operations & Budget",
+    summary: "Secured grant funding, managed the budget, and ran an event for 150–200 attendees.",
+    tags: ["Budgeting", "Operations"],
+    details: "As Program Operations Coordinator for the ACSEL Microgrant, I secured grant funding, managed the program budget, onboarded 20+ volunteers, and led an event for 150–200 attendees.",
+    link: "",
+    linkText: "",
+  },
+];
+
+/* ---------- EXPERIENCE ---------- */
+const EXPERIENCE = [
+  { when: "Sept 2026 — Present", role: "Analytics & Talent Development Intern", org: "MLSE" },
+  { when: "June — Sept 2026",    role: "Total Rewards & Compensation Analyst Intern", org: "Air Liquide Healthcare" },
+  { when: "May — July 2026",     role: "HR Analytics Intern", org: "CNIB" },
+  { when: "Jan — June 2026",     role: "Strategy & Analytics Intern", org: "Canadian Lifecare Learning" },
+  { when: "Nov 2025 — Mar 2026", role: "Program Operations Coordinator", org: "Volunteer Alberta" },
+  { when: "2024 — 2026",         role: "Founder", org: "Everest Allegiance" },
+];
+const EDUCATION = "B.Sc., University of Alberta";
+
+/* ---------- SKILLS (the bit after | shows as a small gold note) ---------- */
+const SKILLS = [
+  { group: "Data & Analytics", items: ["Excel | XLOOKUP · PivotTables · COUNTIFS", "Power BI", "Python | Pandas", "SQL | in progress", "SPSS"] },
+  { group: "Business Analysis", items: ["Requirements gathering", "Process mapping & improvement", "Data quality & governance", "Stakeholder management", "Reporting & data storytelling"] },
+  { group: "Systems & Certifications", items: ["Workday · ADP · Greenhouse", "Monday.com · Notion", "People Analytics | Wharton", "Accounting Analytics | UPenn", "HRCI · OHSC"] },
+];
+/* ====================== END OF EDITABLE CONTENT ====================== */
+</script>
+
+<style>
+  :root {
+    --burgundy: #5c1a26;
+    --burgundy-deep: #3d0f18;
+    --burgundy-soft: #7a2a38;
+    --cream: #f6f0e8;
+    --paper: #fbf8f3;
+    --ink: #221a1b;
+    --muted: #6e6264;
+    --line: #e4d9cd;
+    --gold: #b8935a;
+    --gold-soft: #d9bf93;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Manrope", system-ui, sans-serif; font-size: 16px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.locked { overflow: hidden; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .label { font-size: 11.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+  .serif { font-family: "Cormorant Garamond", Georgia, serif; }
+
+  /* NAV */
+  nav { position: absolute; top: 0; left: 0; right: 0; z-index: 5; }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 84px; }
+  .mark { display: flex; align-items: center; gap: 12px; color: var(--cream); }
+  .mono { width: 40px; height: 40px; border: 1px solid var(--gold); display: grid; place-items: center;
+    font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 700; color: var(--gold-soft); }
+  .mark .nm { font-weight: 600; letter-spacing: .04em; font-size: 15px; }
+  nav ul { display: flex; gap: 34px; list-style: none; font-size: 14px; font-weight: 500; }
+  nav ul a { color: rgba(246,240,232,.72); transition: color .2s; }
+  nav ul a:hover { color: var(--cream); }
+
+  /* HERO */
+  .hero {
+    background: radial-gradient(circle at 80% 15%, rgba(184,147,90,.18), transparent 45%),
+                linear-gradient(160deg, var(--burgundy) 0%, var(--burgundy-deep) 100%);
+    color: var(--cream); padding: 160px 0 0; position: relative; overflow: hidden;
+  }
+  .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(246,240,232,.035) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(246,240,232,.035) 1px, transparent 1px);
+    background-size: 64px 64px; }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 340px; gap: 64px; align-items: center; }
+  .hero h1 { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: clamp(46px, 7vw, 84px);
+    line-height: 1.0; letter-spacing: -0.015em; margin: 22px 0 28px; }
+  .hero h1 em { font-style: italic; color: var(--gold-soft); font-weight: 500; }
+  .hero .lead { font-size: 18px; color: rgba(246,240,232,.78); max-width: 580px; }
+
+  .portrait { position: relative; justify-self: end; width: 100%; max-width: 340px; }
+  .portrait .frame { aspect-ratio: 4 / 5; border-radius: 200px 200px 6px 6px; overflow: hidden;
+    background: linear-gradient(160deg, var(--burgundy-soft), var(--burgundy-deep));
+    border: 1px solid rgba(217,191,147,.45); position: relative; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .portrait .fallback { position: absolute; inset: 0; display: none; place-items: center;
+    font-family: "Cormorant Garamond", serif; font-size: 96px; color: var(--gold-soft); }
+  .portrait.noimg .fallback { display: grid; }
+  .portrait.noimg img { display: none; }
+  .portrait::before { content: ""; position: absolute; inset: 14px -14px -14px 14px;
+    border: 1px solid var(--gold); border-radius: 200px 200px 6px 6px; z-index: -1; opacity: .6; }
+  .portrait .badge { position: absolute; left: -22px; bottom: 30px; background: var(--paper); color: var(--ink);
+    padding: 12px 16px; font-size: 12.5px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    display: flex; align-items: center; gap: 8px; }
+  .portrait .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #3f9a6a;
+    box-shadow: 0 0 0 4px rgba(63,154,106,.2); }
+
+  .cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 38px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px; font-size: 14.5px;
+    font-weight: 600; letter-spacing: .02em; transition: all .2s; cursor: pointer; border: none; font-family: inherit; }
+  .btn.gold { background: var(--gold); color: var(--burgundy-deep); }
+  .btn.gold:hover { background: var(--gold-soft); }
+  .btn.outline { border: 1px solid rgba(246,240,232,.35); color: var(--cream); background: transparent; }
+  .btn.outline:hover { border-color: var(--cream); }
+  .btn.dark { background: var(--burgundy); color: var(--cream); }
+  .btn.dark:hover { background: var(--burgundy-soft); }
+  .btn.line { border: 1px solid var(--burgundy); color: var(--burgundy); background: transparent; }
+  .btn.line:hover { background: var(--burgundy); color: var(--cream); }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 88px; border-top: 1px solid rgba(246,240,232,.16); }
+  .stat { padding: 30px 24px 36px 0; }
+  .stat + .stat { padding-left: 24px; border-left: 1px solid rgba(246,240,232,.16); }
+  .stat .num { font-family: "Cormorant Garamond", serif; font-size: 46px; font-weight: 600; color: var(--gold-soft); line-height: 1; }
+  .stat .txt { font-size: 13.5px; color: rgba(246,240,232,.7); margin-top: 8px; max-width: 200px; }
+
+  /* SECTIONS */
+  section { padding: 110px 0; }
+  .sec-head { display: grid; grid-template-columns: 300px 1fr; gap: 40px; margin-bottom: 56px; align-items: end; }
+  .sec-head h2 { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: clamp(38px, 5vw, 54px);
+    line-height: 1.05; color: var(--burgundy); margin-top: 12px; }
+  .sec-head p { color: var(--muted); font-size: 16.5px; max-width: 520px; }
+
+  /* FEATURED CARDS */
+  .featured { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .fcard { background: #fff; border: 1px solid var(--line); padding: 38px 36px 34px; cursor: pointer;
+    display: flex; flex-direction: column; position: relative; transition: transform .25s, box-shadow .25s, border-color .25s;
+    text-align: left; font-family: inherit; color: inherit; }
+  .fcard::before { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 0; background: var(--burgundy); transition: width .35s; }
+  .fcard:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(61,15,24,.10); border-color: transparent; }
+  .fcard:hover::before { width: 100%; }
+  .fcard .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; }
+  .fcard .idx { font-family: "Cormorant Garamond", serif; font-size: 54px; font-weight: 500; color: var(--gold); line-height: .9; }
+  .fcard h3 { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: 30px; line-height: 1.15; margin-bottom: 14px; }
+  .fcard p { color: var(--muted); font-size: 15.5px; flex: 1; }
+  .fcard .org { font-size: 13px; font-weight: 600; color: var(--burgundy-soft); margin-bottom: 8px; }
+  .more-link { margin-top: 26px; font-size: 13.5px; font-weight: 700; color: var(--burgundy); letter-spacing: .03em; display: inline-flex; gap: 8px; align-items: center; }
+  .more-link span { transition: transform .25s; }
+  .fcard:hover .more-link span, .c:hover .more-link span { transform: translateX(5px); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+  .tag { font-size: 11.5px; font-weight: 600; letter-spacing: .04em; padding: 5px 10px; border: 1px solid var(--line); color: var(--burgundy-soft); background: var(--paper); }
+
+  /* MORE PROJECTS */
+  .more { background: var(--paper); }
+  .more .c { background: #fff; }
+  .more .c:hover { background: var(--cream); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .cards.two { grid-template-columns: repeat(2, 1fr); }
+  .cards.two .c { padding: 40px 36px 36px; }
+  .cards.two .c h3 { font-size: 30px; }
+  section.alt { background: var(--cream); }
+  section.alt .fcard { border-color: transparent; }
+  .c { background: var(--paper); padding: 32px 28px 30px; display: flex; flex-direction: column; cursor: pointer;
+    transition: background .25s; text-align: left; border: none; font-family: inherit; color: inherit; }
+  .c:hover { background: #fff; }
+  .c .k { margin-bottom: 16px; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+  .c h3 { font-family: "Cormorant Garamond", serif; font-size: 25px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; color: var(--burgundy); }
+  .c p { font-size: 14.5px; color: var(--muted); flex: 1; }
+  .c .more-link { margin-top: 18px; font-size: 12.5px; }
+  .pill { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--burgundy-soft);
+    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(184,147,90,.2); }
+
+  /* EXPERIENCE */
+  .exp-row { display: grid; grid-template-columns: 300px 1fr auto; gap: 40px; padding: 24px 0; border-top: 1px solid var(--line); align-items: baseline; }
+  .exp-row:last-child { border-bottom: 1px solid var(--line); }
+  .exp-row .when { font-size: 13.5px; color: var(--muted); font-weight: 500; }
+  .exp-row .role { font-family: "Cormorant Garamond", serif; font-size: 25px; font-weight: 600; line-height: 1.2; }
+  .exp-row .org { font-size: 14.5px; color: var(--burgundy-soft); font-weight: 600; text-align: right; }
+
+  /* SKILLS */
+  .skills-wrap { background: var(--burgundy-deep); color: var(--cream); }
+  .skills-wrap .sec-head h2 { color: var(--cream); }
+  .skills-wrap .sec-head p { color: rgba(246,240,232,.7); }
+  .skills { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(246,240,232,.16); }
+  .sk { padding: 34px 30px 10px 0; }
+  .sk + .sk { padding-left: 30px; border-left: 1px solid rgba(246,240,232,.16); }
+  .sk h4 { margin-bottom: 16px; }
+  .sk ul { list-style: none; }
+  .sk li { padding: 9px 0; border-bottom: 1px solid rgba(246,240,232,.09); font-size: 15px; color: rgba(246,240,232,.88); }
+  .sk li small { color: var(--gold-soft); font-size: 12px; margin-left: 6px; }
+
+  /* CONTACT */
+  .contact { text-align: center; padding: 130px 0 120px; }
+  .contact h2 { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.05; color: var(--burgundy); margin: 18px auto 22px; max-width: 760px; }
+  .contact h2 em { color: var(--gold); }
+  .contact p { color: var(--muted); font-size: 17px; margin-bottom: 38px; }
+  .contact .cta { justify-content: center; margin-top: 0; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 13px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  /* MODAL (case study detail) */
+  .overlay { position: fixed; inset: 0; background: rgba(30,10,14,.55); backdrop-filter: blur(4px);
+    opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 50; }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .panel { position: fixed; top: 0; right: 0; bottom: 0; width: min(760px, 100%); background: var(--paper);
+    transform: translateX(100%); transition: transform .4s cubic-bezier(.2,.8,.2,1); z-index: 51; overflow-y: auto; }
+  .panel.open { transform: translateX(0); }
+  .panel-head { background: linear-gradient(160deg, var(--burgundy), var(--burgundy-deep)); color: var(--cream); padding: 64px 52px 44px; position: relative; }
+  .close { position: absolute; top: 22px; right: 22px; width: 42px; height: 42px; border: 1px solid rgba(246,240,232,.3);
+    background: transparent; color: var(--cream); font-size: 22px; cursor: pointer; line-height: 1; transition: background .2s; }
+  .close:hover { background: rgba(246,240,232,.1); }
+  .panel-head h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(32px, 4.5vw, 46px); font-weight: 600; line-height: 1.1; margin: 14px 0 14px; }
+  .panel-head .sub { color: rgba(246,240,232,.75); font-size: 14.5px; }
+  .panel-head .tags .tag { background: transparent; border-color: rgba(246,240,232,.25); color: var(--gold-soft); }
+  .panel-body { padding: 44px 52px 64px; }
+  .block { margin-bottom: 34px; }
+  .block h4 { margin-bottom: 10px; }
+  .block p { font-size: 16px; white-space: pre-line; }
+  .steps { list-style: none; counter-reset: s; }
+  .steps li { counter-increment: s; position: relative; padding: 12px 0 12px 46px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+  .steps li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 10px;
+    font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 600; color: var(--gold); }
+  .outcome { background: var(--cream); border-left: 3px solid var(--burgundy); padding: 24px 26px; }
+  .note { font-size: 13.5px; color: var(--muted); font-style: italic; margin-top: 18px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    .hero { padding-top: 120px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .portrait { justify-self: start; max-width: 260px; order: -1; }
+    .stats { grid-template-columns: 1fr 1fr; margin-top: 60px; }
+    .stat:nth-child(3) { border-left: none; padding-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid rgba(246,240,232,.16); }
+    section { padding: 76px 0; }
+    .sec-head, .featured, .exp-row { grid-template-columns: 1fr; gap: 16px; }
+    .exp-row { gap: 4px; }
+    .exp-row .org { text-align: left; }
+    .cards, .cards.two, .skills { grid-template-columns: 1fr; }
+    .cards.two .c { padding: 30px 24px; }
+    .cards.two .c h3 { font-size: 26px; }
+    .sk + .sk { padding-left: 0; border-left: none; border-top: 1px solid rgba(246,240,232,.16); }
+    .fcard { padding: 30px 24px; }
+    .panel-head { padding: 64px 24px 34px; }
+    .panel-body { padding: 34px 24px 56px; }
+    .portrait .badge { left: auto; right: -10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <nav>
+    <div class="wrap">
+      <a href="#" class="mark"><span class="mono" id="mono"></span><span class="nm" id="navName"></span></a>
+      <ul>
+        <li><a href="#analytics">Analytics</a></li>
+        <li><a href="#work">Case Studies</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="label" id="tagline"></p>
+        <h1 id="headline"></h1>
+        <p class="lead" id="intro"></p>
+        <div class="cta" id="heroCta"></div>
+      </div>
+      <div class="portrait" id="portrait">
+        <div class="frame">
+          <img id="photo" alt="">
+          <div class="fallback" id="fallback"></div>
+        </div>
+        <div class="badge">Open to opportunities</div>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<section id="analytics">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="label">Data Analytics</p><h2>Analytics projects</h2></div>
+      <p>End-to-end projects, from raw data to SQL to dashboard to recommendation. Click any project for the business question and approach.</p>
+    </div>
+    <div class="cards two" id="analyticsCards"></div>
+  </div>
+</section>
+
+<section id="work" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="label">Selected Work</p><h2>Case studies</h2></div>
+      <p>Click any project to see the full problem, approach, and outcome. Confidential data has been left out.</p>
+    </div>
+    <div class="featured" id="featured"></div>
+  </div>
+</section>
+
+<section id="projects" class="more">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="label">Analytics &amp; Research</p><h2>More projects</h2></div>
+      <p>Academic research and analytics work from earlier roles.</p>
+    </div>
+    <div class="cards" id="cards"></div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="label">Career</p><h2>Experience</h2></div>
+      <p id="education"></p>
+    </div>
+    <div id="exp"></div>
+  </div>
+</section>
+
+<section class="skills-wrap">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="label">Toolkit</p><h2>Skills &amp; tools</h2></div>
+      <p>The tools and methods I use to go from raw data to a recommendation.</p>
+    </div>
+    <div class="skills" id="skills"></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="label">Get in touch</p>
+    <h2>Have data that needs <em>a story?</em></h2>
+    <p id="contactLine"></p>
+    <div class="cta" id="contactCta"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span id="copy"></span><span id="loc"></span></div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+  <div class="panel-head">
+    <button class="close" id="closeBtn" aria-label="Close">×</button>
+    <p class="label" id="pLabel"></p>
+    <h2 id="pTitle"></h2>
+    <p class="sub" id="pSub"></p>
+    <div class="tags" id="pTags"></div>
+  </div>
+  <div class="panel-body" id="pBody"></div>
+</aside>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s || "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const tagsHTML = (t) => (t || []).map((x) => `<span class="tag">${esc(x)}</span>`).join("");
+  const pad = (n) => String(n).padStart(2, "0");
+
+  // Hero
+  $("mono").textContent = SITE.initials;
+  $("navName").textContent = SITE.name;
+  $("fallback").textContent = SITE.initials;
+  $("tagline").textContent = SITE.tagline;
+  $("headline").innerHTML = esc(SITE.headline).replace(/\*(.+?)\*/g, "<em>$1</em>");
+  $("intro").textContent = SITE.intro;
+  const img = $("photo");
+  img.alt = "Photo of " + SITE.name;
+  img.onerror = () => $("portrait").classList.add("noimg");
+  if (SITE.photo) img.src = SITE.photo; else $("portrait").classList.add("noimg");
+
+  let hero = `<a class="btn gold" href="#work">View case studies →</a>`;
+  if (SITE.resume) hero += `<a class="btn outline" href="${esc(SITE.resume)}" target="_blank" rel="noopener">Resume</a>`;
+  hero += `<a class="btn outline" href="${esc(SITE.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`;
+  $("heroCta").innerHTML = hero;
+
+  $("stats").innerHTML = STATS.map((s) => `<div class="stat"><div class="num">${esc(s.num)}</div><div class="txt">${esc(s.text)}</div></div>`).join("");
+
+  // Featured
+  $("featured").innerHTML = FEATURED.map((p, i) => `
+    <button class="fcard" data-kind="f" data-i="${i}">
+      <div class="top"><span class="idx">${pad(i + 1)}</span><span class="label">${esc(p.type)}</span></div>
+      <div class="org">${esc(p.org)} · ${esc(p.year)}</div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.summary)}</p>
+      <div class="tags">${tagsHTML(p.tags)}</div>
+      <span class="more-link">Read case study <span>→</span></span>
+    </button>`).join("");
+
+  // Projects (analytics + more)
+  const cardHTML = (kind) => (p, i) => `
+    <button class="c" data-kind="${kind}" data-i="${i}">
+      <div class="k"><span class="label">${esc(p.label)}</span>${p.status === "building" ? '<span class="pill">In development</span>' : ""}</div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.summary)}</p>
+      <div class="tags">${tagsHTML(p.tags)}</div>
+      <span class="more-link">View project <span>→</span></span>
+    </button>`;
+  $("analyticsCards").innerHTML = ANALYTICS.map(cardHTML("a")).join("");
+  $("cards").innerHTML = PROJECTS.map((p, i) => `
+    <button class="c" data-kind="p" data-i="${i}">
+      <div class="k"><span class="label">${esc(p.label)}</span>${p.status === "building" ? '<span class="pill">In development</span>' : ""}</div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.summary)}</p>
+      <div class="tags">${tagsHTML(p.tags)}</div>
+      <span class="more-link">View details <span>→</span></span>
+    </button>`).join("");
+
+  // Experience
+  $("education").textContent = EDUCATION;
+  $("exp").innerHTML = EXPERIENCE.map((e) => `<div class="exp-row"><span class="when">${esc(e.when)}</span><span class="role">${esc(e.role)}</span><span class="org">${esc(e.org)}</span></div>`).join("");
+
+  // Skills
+  $("skills").innerHTML = SKILLS.map((g) => `
+    <div class="sk"><h4 class="label">${esc(g.group)}</h4><ul>${g.items.map((it) => {
+      const [a, b] = it.split("|").map((x) => x.trim());
+      return `<li>${esc(a)}${b ? `<small>${esc(b)}</small>` : ""}</li>`;
+    }).join("")}</ul></div>`).join("");
+
+  // Contact
+  $("contactLine").textContent = SITE.contactLine;
+  $("contactCta").innerHTML = `<a class="btn dark" href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a>
+    <a class="btn line" href="${esc(SITE.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`;
+  $("copy").textContent = "© " + new Date().getFullYear() + " " + SITE.name;
+  $("loc").textContent = SITE.location;
+
+  // Detail panel
+  const panel = $("panel"), overlay = $("overlay");
+  function linkBtn(p) {
+    return p.link ? `<a class="btn dark" href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.linkText || "View project")} ↗</a>` : "";
+  }
+  function open(kind, i, push) {
+    const p = kind === "f" ? FEATURED[i] : kind === "a" ? ANALYTICS[i] : PROJECTS[i];
+    if (!p) return;
+    if (kind === "f") {
+      $("pLabel").textContent = `Case Study ${pad(i + 1)} · ${p.type}`;
+      $("pSub").textContent = `${p.org} · ${p.year}`;
+      $("pBody").innerHTML = `
+        ${p.context ? `<div class="block"><h4 class="label">Context</h4><p>${esc(p.context)}</p></div>` : ""}
+        ${p.problem ? `<div class="block"><h4 class="label">The Problem</h4><p>${esc(p.problem)}</p></div>` : ""}
+        ${p.approach && p.approach.length ? `<div class="block"><h4 class="label">My Approach</h4><ol class="steps">${p.approach.map((a) => `<li>${esc(a)}</li>`).join("")}</ol></div>` : ""}
+        ${p.outcome ? `<div class="block outcome"><h4 class="label">Outcome</h4><p>${esc(p.outcome)}</p></div>` : ""}
+        ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
+        ${p.link ? `<div class="cta">${linkBtn(p)}</div>` : ""}`;
+    } else {
+      $("pLabel").textContent = p.label;
+      $("pSub").textContent = p.status === "building" ? "In development" : "";
+      $("pBody").innerHTML = `
+        <div class="block"><h4 class="label">Overview</h4><p>${esc(p.summary)}</p></div>
+        ${p.details ? `<div class="block"><h4 class="label">Details</h4><p>${esc(p.details)}</p></div>` : ""}
+        ${p.link ? `<div class="cta">${linkBtn(p)}</div>` : ""}`;
+    }
+    $("pTitle").textContent = p.title;
+    $("pTags").innerHTML = tagsHTML(p.tags);
+    panel.scrollTop = 0;
+    panel.classList.add("open"); overlay.classList.add("open"); document.body.classList.add("locked");
+    if (push !== false && p.id) history.replaceState(null, "", "#" + p.id);
+    $("closeBtn").focus();
+  }
+  function close() {
+    panel.classList.remove("open"); overlay.classList.remove("open"); document.body.classList.remove("locked");
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  }
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest("[data-kind]");
+    if (card) open(card.dataset.kind, +card.dataset.i);
+  });
+  overlay.addEventListener("click", close);
+  $("closeBtn").addEventListener("click", close);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+
+  // Open a project directly from a shared link, e.g. yoursite.github.io/#churn
+  const h = location.hash.slice(1);
+  if (h) {
+    const fi = FEATURED.findIndex((p) => p.id === h);
+    const ai = ANALYTICS.findIndex((p) => p.id === h);
+    const pi = PROJECTS.findIndex((p) => p.id === h);
+    if (fi > -1) open("f", fi, false); else if (ai > -1) open("a", ai, false); else if (pi > -1) open("p", pi, false);
+  }
+})();
+</script>
+</body>
+</html>
